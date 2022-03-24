@@ -65,7 +65,7 @@ let users = [
 
 
 async function makeDefaultConnection() {
-  let uri = process.env.MONGOLAB_URI || `mongodb://127.0.0.1:27017/api-project`;
+  let uri = process.env.MONGODB_URI || `mongodb://127.0.0.1:27017/api-project`;
 
   let conn = mongoose.createConnection(uri);
 
