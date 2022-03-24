@@ -61,26 +61,7 @@ let users = [
     password: "123"
   },
 ];
-
-Itinerary.deleteMany({})
-  .then(res => Itinerary.create(itineraries))
-  .then(itineraries => {
-    process.exit();
-})
-
-Place.deleteMany({})
-  .then(res => Place.create(places))
-  .then(places => {
-    process.exit();
-})
-
-User.deleteMany({})
-  .then(res => User.create(users))
-  .then(users => {
-    process.exit();
-  })
-
-  console.log(User.find())
+  
 
 
-module.exports = { User, Place, Itinerary };
+module.exports = { User, Place, Itinerary, users, places, itineraries };

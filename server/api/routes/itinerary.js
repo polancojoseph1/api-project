@@ -1,21 +1,45 @@
 const express = require('express');
 const router = express.Router();
-// const { Itinerary } = require('../../db')
+const { Itinerary } = require('../../db')
 
-router.get('/', (req, res) => {
-  res.send('Hello World!')
+router.get('/', async (req, res) => {
+  const itineraries = await Itinerary.find({});
+  res.send(itineraries);
 })
 
-router.post('/', (req, res) => {
-  res.send('Got a POST request')
+router.post('/', async (req, res) => {
+  const { city, arrival, departure, timeOfStay } = req.body;
+  const newItinerary = {
+    city: city,
+    arrival: arrival,
+    departure: departure,
+    timeOfStay: timeOfStay
+  }
+  const created = await Itinerary.create(newItinerary);
+  res.send(created)
 })
 
-router.put('/q', (req, res) => {
-  res.send('Got a PUT request at /user')
+router.put('/:id', async (req, res) => {
+  let id = req.params.id;
+  const { city, arrival, departure, timeOfStay } = req.body;
+  const newItinerary = {
+    city: city,
+    arrival: arrival,
+    departure: departure,
+    timeOfStay: timeOfStay
+  }
+
+  const updatedItinerary = await Itinerary.findByIdAndUpdate(id, newItinerary);
+
+  res.send(updatedItinerary)
 })
 
-router.delete('/q', (req, res) => {
-  res.send('Got a DELETE request at /user')
+router.delete('/:id', async (req, res) => {
+  let id = req.params.id;
+
+  const deletedItinerary = await Itinerary.findByIdAndDelete(id);
+
+  res.send(deletedItinerary)
 })
 
 module.exports = router;
