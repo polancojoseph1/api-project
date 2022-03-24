@@ -16,7 +16,7 @@ console.log(__dirname)
 app.use('/', serveStatic ( path.join(__dirname, '../index.html' ) ) );
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '../index.html')
+    res.sendFile(__dirname + '/../index.html')
 })
 
 app.use(express.json());
