@@ -3,41 +3,57 @@ const { Place } = require('../../db');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const places = await Place.find({});
-  res.send(places);
+  try {
+    const places = await Place.find({});
+    res.send(places);
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 router.post('/', async (req, res) => {
-  const { name, city, formattedAddress } = req.body;
-  const newPlace = {
-    name: name,
-    city: city,
-    formattedAddress: formattedAddress
+  try {
+    const { name, city, formattedAddress } = req.body;
+    const newPlace = {
+      name: name,
+      city: city,
+      formattedAddress: formattedAddress
+    }
+    const created = await Place.create(newPlace);
+    res.send(created)
+  } catch (error) {
+    console.error(error)
   }
-  const created = await Place.create(newPlace);
-  res.send(created)
 })
 
 router.put('/:id', async (req, res) => {
-  let id = req.params.id;
-  const { name, city, formattedAddress } = req.body;
-  const newPlace = {
-    name: name,
-    city: city,
-    formattedAddress: formattedAddress
+  try {
+    let id = req.params.id;
+    const { name, city, formattedAddress } = req.body;
+    const newPlace = {
+      name: name,
+      city: city,
+      formattedAddress: formattedAddress
+    }
+  
+    const updatedPlace = await Place.findByIdAndUpdate(id, newPlace);
+  
+    res.send(updatedPlace)
+  } catch (error) {
+    console.error(error)
   }
-
-  const updatedPlace = await Place.findByIdAndUpdate(id, newPlace);
-
-  res.send(updatedPlace)
 })
 
 router.delete('/:id', async (req, res) => {
-  let id = req.params.id;
+  try {
+    let id = req.params.id;
 
-  const deletedPlace = await Place.findByIdAndDelete(id);
-
-  res.send(deletedPlace);
+    const deletedPlace = await Place.findByIdAndDelete(id);
+  
+    res.send(deletedPlace);
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 module.exports = router;

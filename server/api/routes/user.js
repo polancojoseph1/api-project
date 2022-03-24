@@ -3,44 +3,61 @@ const router = express.Router();
 const { User } = require('../../db')
 
 router.get('/', async (req, res) => {
-  const users = await User.find({});
-  res.send(users);
+  try {
+    const users = await User.find({});
+    res.send(users);
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 router.post('/', async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
-  const newUser = {
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    password: password
+  try {
+    const { firstName, lastName, email, password } = req.body;
+    const newUser = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
+    }
+    const created = await User.create(newUser);
+    res.send(created)    
+  } catch (error) {
+    console.error(error)
   }
-  const created = await User.create(newUser);
-  res.send(created)
+
 })
 
 router.put('/:id', async (req, res) => {
-  let id = req.params.id;
-  const { firstName, lastName, email, password } = req.body;
-  const newUser = {
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    password: password
+  try {
+    let id = req.params.id;
+    const { firstName, lastName, email, password } = req.body;
+    const newUser = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
+    }
+  
+    const updatedUser = await User.findByIdAndUpdate(id, newUser);
+  
+    res.send(updatedUser);    
+  } catch (error) {
+    console.error(error)
   }
 
-  const updatedUser = await User.findByIdAndUpdate(id, newUser);
-
-  res.send(updatedUser);
 })
 
 router.delete('/:id', async (req, res) => {
+  try {
+    let id = req.params.id;
+
+    const deletedUser = await User.findByIdAndDelete(id);
   
-  let id = req.params.id;
-
-  const deletedUser = await User.findByIdAndDelete(id);
-
-  res.send(deletedUser);
+    res.send(deletedUser);
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 module.exports = router;
