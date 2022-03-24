@@ -47,7 +47,7 @@ let users = [
     lastName: "Polanco",
     email: "jp@gmail.com",
     password: "123"
-  },
+  }, 
   {
     firstName: "Nate",
     lastName: "Derosa",
