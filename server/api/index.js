@@ -11,10 +11,13 @@ app.listen(port, () => {
 
 const router = require('./routes');
 
-app.use('/', serveStatic ( path.join(__dirname, '../index.html' ) ) );
+console.log(path.join(__dirname, path.resolve('/index.html') ))
+console.log(path.resolve(__dirname))
+
+app.use('/', serveStatic ( path.join(__dirname, '/index.html' ) ) );
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/../index.html')
+    res.sendFile(__dirname + '/index.html')
 })
 
 app.use(express.json());
