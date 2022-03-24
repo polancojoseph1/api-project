@@ -3,7 +3,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/api/index.js",
     "seed": "node server/db/seed.js",
-    "db": "node server/db/index.js"
+    "db": "node server/db/index.js",
+    "testScript": "node server/db/server/Place.js"
   },
   "engines": {
     "node": "17.6.0"
