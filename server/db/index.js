@@ -1,7 +1,6 @@
 const User = require("./models/User.js");
 const Place = require("./models/Place.js");
 const Itinerary = require("./models/Itinerary.js");
-let mongoose  = require('mongoose');
 
 let places = [
   {
@@ -62,21 +61,6 @@ let users = [
     password: "123"
   },
 ];
-
-
-async function makeDefaultConnection() {
-  let uri = process.env.MONGODB_URI || `mongodb://127.0.0.1:27017/api-project`;
-
-  let conn = mongoose.createConnection(uri);
-
-  await conn.on('error', function(err){
-    console.log('Connection Error ::: ', err);
-  });
-
-  return conn;
-}
-
-module.exports.defaultConnection = makeDefaultConnection();
   
 
 

@@ -11,9 +11,6 @@ app.listen(port, () => {
 
 const router = require('./routes');
 
-console.log(path.join(__dirname, path.resolve('/index.html') ))
-console.log(path.resolve(__dirname))
-
 app.use('/', serveStatic ( path.join(__dirname, '/index.html' ) ) );
 
 app.get('/', function (req, res) {
