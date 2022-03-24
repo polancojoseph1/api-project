@@ -66,21 +66,13 @@ let users = [
 
 async function makeDefaultConnection() {
   let uri = process.env.MONGOLAB_URI || `mongodb://127.0.0.1:27017/api-project`;
-  console.log('Connecting to DB : ', uri);
 
   let conn = mongoose.createConnection(uri);
-
-  console.log(conn, "connnnn")
 
   await conn.on('error', function(err){
     console.log('Connection Error ::: ', err);
   });
 
-  console.log(User, "Something")
-
-  // await conn.model('User', User);
-  // await conn.model('Place', Place);
-  // await conn.model('Itinerary', Itinerary);
   return conn;
 }
 
