@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
   } catch (error) {
     console.error(error)
   }
-
+  process.exit();
 })
 
 router.put('/:id', async (req, res) => {
@@ -45,7 +45,7 @@ router.put('/:id', async (req, res) => {
   } catch (error) {
     console.error(error)
   }
-
+  process.exit();
 })
 
 router.delete('/:id', async (req, res) => {
@@ -58,6 +58,7 @@ router.delete('/:id', async (req, res) => {
   } catch (error) {
     console.error(error)
   }
+  process.exit();
 })
 
 module.exports = router;
