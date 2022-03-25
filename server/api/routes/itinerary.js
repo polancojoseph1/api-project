@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   
 })
 
-router.post('/', async (req, res) => {
+router.post('/', (req, res) => {
   try {
     const { city, arrival, departure, timeOfStay } = req.body;
     const newItinerary = {
@@ -21,12 +21,11 @@ router.post('/', async (req, res) => {
       departure: departure,
       timeOfStay: timeOfStay
     }
-    const created = await Itinerary.create(newItinerary);
+    const created = Itinerary.create(newItinerary);
     res.send(created);
   } catch (error) {
     console.error(error);
   }
-  process.exit();
 })
 
 router.put('/:id', async (req, res) => {
@@ -46,7 +45,6 @@ router.put('/:id', async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-  process.exit();
 })
 
 router.delete('/:id', async (req, res) => {
@@ -59,7 +57,6 @@ router.delete('/:id', async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-  process.exit();
 })
 
 module.exports = router;
