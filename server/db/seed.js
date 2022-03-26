@@ -6,18 +6,18 @@ const { users, places, itineraries } = require("./index.js")
 Itinerary.deleteMany({})
   .then(res => Itinerary.create(itineraries))
   .then(itineraries => {
-    console.log("seeded itineraries")
+    console.log("seeded itineraries");
     process.exit();
 })
 
 Place.deleteMany({})
   .then(res => Place.create(places))
   .then(places => {
-    console.log("seeded places")
+    console.log("seeded places");
 })
 
 User.deleteMany({})
   .then(res => User.create(users))
   .then(users => {
-    console.log("seeded users")
+    console.log("seeded users");
 })

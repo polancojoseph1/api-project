@@ -43,7 +43,7 @@ router.put('/:id', async (req, res) => {
 
     res.send(updatedItinerary)
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 })
 

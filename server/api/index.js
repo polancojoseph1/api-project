@@ -3,28 +3,33 @@ const app = express();
 const port = process.env.PORT || 5000;
 const path = require('path');
 const serveStatic = require('serve-static');
+const bodyParser = require('body-parser');
+const jwt = require('./helper/jwt');
+const errorHandler = require('./helper/errorHandler');
 module.exports = app;
 
-app.listen(port, () => {
-  console.log(`listening on port ${port}`);
-})
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.json());
 
-const router = require('./routes');
+// use JWT auth to secure the api
+app.use(jwt());
 
+// api routes
+app.use('/api', require('./routes'));
+app.use('/auth', require('./auth/users.controller'));
+
+// Serving static HTML file
 app.use('/', serveStatic ( path.join(__dirname, '/index.html' ) ) );
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html')
 })
 
-app.use(express.json());
-app.use('/api', router);
+// Global error handler
+app.use(errorHandler);
 
-app.use((req, res, next) => {
-  res.status(404).send("Sorry can't find that!");
-})
-
-app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send('Something broke!');
+// Listening on designated port
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
 })
